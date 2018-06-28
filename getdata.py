@@ -29,7 +29,7 @@ def getmeminfo(pname):
         if re.search("Native Heap", line):
             line = line.strip("\n")
             line_array = line.split(" ")
-            line_array = ' '.join(line_array).split()
+            line_array = " ".join(line_array).split()
             line_dict["Native_Pss"] = line_array[2]
             line_dict["Native_Heap_Alloc"] = line_array[-2]
             line_dict["Native_Heap_Free"] = line_array[-1]
@@ -37,7 +37,7 @@ def getmeminfo(pname):
         if re.search("TOTAL", line):
             line = line.strip("\n")
             line_array = line.split(" ")
-            line_array = ' '.join(line_array).split()
+            line_array = " ".join(line_array).split()
             line_dict["Total_Pss"] = line_array[1]
             line_dict["Total_Heap_Alloc"] = line_array[-2]
             line_dict["Total_Heap_Free"] = line_array[-1]
@@ -71,3 +71,6 @@ def getcpucores():
     if line_dict_cpu:
         return line_dict_cpu
     return "App not started.Unable to fetch CPU Core"
+
+
+print ("Complete")
