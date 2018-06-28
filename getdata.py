@@ -24,7 +24,8 @@ def check_device(args):
 
 def getmeminfo(pname):
     line_dict = {}
-    ls = subprocess.Popen(["adb", "shell", "dumpsys", "meminfo", pname, " | grep -E", "'Native Heap|TOTAL' -A 2"], stdout=subprocess.PIPE)
+    ls = subprocess.Popen(["adb", "shell", "dumpsys", "meminfo", pname, " | grep -E", "'Native Heap|TOTAL' -A 2"],
+                          stdout=subprocess.PIPE)
     out = ls.stdout.readlines()
     for line in out:
         if re.search("Native Heap", line):
@@ -35,6 +36,7 @@ def getmeminfo(pname):
             line_dict["Native_Heap_Alloc"] = line_array[-2]
             line_dict["Native_Heap_Free"] = int(line_array[-1])
 
+<<<<<<< HEAD
         if re.search("TOTAL", line):
             line = line.strip("\n")
             line_array = line.split(" ")
@@ -42,6 +44,18 @@ def getmeminfo(pname):
             line_dict["Total_Pss"] = int(line_array[1])
             line_dict["Total_Heap_Alloc"] = line_array[-2]
             line_dict["Total_Heap_Free"] = int(line_array[-1])
+=======
+            for line_sub in out:
+                if re.search("TOTAL", line_sub):
+                    line_sub = line_sub.strip("\n")
+                    line_array = line_sub.split(" ")
+                    line_array = " ".join(line_array).split()
+                    line_dict["Total_Pss"] = int(line_array[1])
+                    line_dict["Total_Heap_Alloc"] = int(line_array[-2])
+                    line_dict["Total_Heap_Free"] = int(line_array[-1])
+                    break
+        break
+>>>>>>> 9196c09aa1f0a96a95f08f92513ecc6ad1439dab
 
     if line_dict:
         return json.dumps(line_dict)

@@ -17,7 +17,7 @@ public class pyhton {
 		System.out.println(n);
 		
 		JSONObject jsonObj = new JSONObject(n);
-		//for()
+		System.out.println(jsonObj.get("Native_Heap_Free"));
 
 		
 
