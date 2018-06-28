@@ -59,7 +59,7 @@ def getmeminfo(pname):
 
     if line_dict:
         return json.dumps(line_dict)
-    return "App not started.Unable to fetch meminfo"
+    return "App not started.Unable to fetch meminfo...."
 
 
 def getcpuinfo(pname):
