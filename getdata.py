@@ -24,7 +24,7 @@ def check_device(args):
 
 def getmeminfo(pname):
     line_dict = {}
-    ls = subprocess.Popen(["adb", "shell", "dumpsys", "meminfo", pname], stdout=subprocess.PIPE)
+    ls = subprocess.Popen(["adb", "shell", "dumpsys", "meminfo", pname, " | grep -E", "'Native Heap|TOTAL' -A 2"], stdout=subprocess.PIPE)
     out = ls.stdout.readlines()
     for line in out:
         if re.search("Native Heap", line):
