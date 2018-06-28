@@ -3,6 +3,7 @@ import subprocess
 import sys
 import time
 from subprocess import check_output, CalledProcessError
+import json
 
 cmp = "tv.airtel.visionsample/.activity.MainActivity"
 pname = "tv.airtel.visionsample"
@@ -30,20 +31,20 @@ def getmeminfo(pname):
             line = line.strip("\n")
             line_array = line.split(" ")
             line_array = " ".join(line_array).split()
-            line_dict["Native_Pss"] = line_array[2]
-            line_dict["Native_Heap_Alloc"] = line_array[-2]
-            line_dict["Native_Heap_Free"] = line_array[-1]
+            line_dict["Native_Pss"] = int(line_array[2])
+            line_dict["Native_Heap_Alloc"] = int(line_array[-2])
+            line_dict["Native_Heap_Free"] = int(line_array[-1])
 
         if re.search("TOTAL", line):
             line = line.strip("\n")
             line_array = line.split(" ")
             line_array = " ".join(line_array).split()
-            line_dict["Total_Pss"] = line_array[1]
-            line_dict["Total_Heap_Alloc"] = line_array[-2]
-            line_dict["Total_Heap_Free"] = line_array[-1]
+            line_dict["Total_Pss"] = int(line_array[1])
+            line_dict["Total_Heap_Alloc"] = int(line_array[-2])
+            line_dict["Total_Heap_Free"] = int(line_array[-1])
 
     if line_dict:
-        return line_dict
+        return json.dumps(line_dict)
     return "App not started.Unable to fetch meminfo"
 
 
