@@ -32,7 +32,7 @@ def getmeminfo(pname):
             line_array = line.split(" ")
             line_array = " ".join(line_array).split()
             line_dict["Native_Pss"] = int(line_array[2])
-            line_dict["Native_Heap_Alloc"] = int(line_array[-2])
+            line_dict["Native_Heap_Alloc"] = line_array[-2]
             line_dict["Native_Heap_Free"] = int(line_array[-1])
 
         if re.search("TOTAL", line):
@@ -40,7 +40,7 @@ def getmeminfo(pname):
             line_array = line.split(" ")
             line_array = " ".join(line_array).split()
             line_dict["Total_Pss"] = int(line_array[1])
-            line_dict["Total_Heap_Alloc"] = int(line_array[-2])
+            line_dict["Total_Heap_Alloc"] = line_array[-2]
             line_dict["Total_Heap_Free"] = int(line_array[-1])
 
     if line_dict:
