@@ -9,12 +9,10 @@ pname = "tv.airtel.visionsample"
 device_id = "emulator-5554"
 
 
-
-
 # Check IF Android Device is connected
 def check_device(args):
     try:
-        adb_ouput = check_output(["adb","devices"])
+        adb_ouput = check_output(["adb", "devices"])
         if args in adb_ouput:
             return "Device is Connected"
         else:
@@ -58,22 +56,18 @@ def getcpuinfo(pname):
         return "App not started.Unable to fetch cpuinfo"
 
 
-##def main():
-##    f1 = check_device(sys.argv[1])
-##    f2 = getmeminfo(sys.argv[2])
-##    f3 = getcpuinfo("tv.airtel.visionsample")
-##    return f1,f2,f3
-##
-##if __name__ == "__main__":
-##    main()
+def getcpucores():
+    line_dict_cpu = {}
+    try:
+        for i in range(1, 5):
+            lo = subprocess.Popen(["adb shell cat sys / devices / system / cpu / cpu" + str(i) +
+                                   " / cpufreq / scaling_cur_freq"],
+                                  stdout=subprocess.PIPE)
+            out = lo.stdout.readlines()
+            line_dict_cpu["CPU" + str(i)] = out
+    except OSError:
+        return "Unable to fetch CPU core details in Emulator"
 
-
-
-# def main():
-#     print("Start Measuring")
-#     print check_device(device_id)
-#     print getmeminfo(pname)
-#
-#
-# if __name__ == "__main__":
-#     main()
+    if line_dict_cpu:
+        return line_dict_cpu
+    return "App not started.Unable to fetch CPU Core"
