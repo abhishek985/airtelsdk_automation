@@ -78,4 +78,4 @@ def getcpucores():
     return "App not started.Unable to fetch CPU Core"
 
 
-print ("Complete")
+print ("Test Complete")
