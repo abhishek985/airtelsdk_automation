@@ -1,9 +1,8 @@
 import re
 import subprocess
-import sys
-import time
 from subprocess import check_output, CalledProcessError
 import json
+import os
 
 cmp = "tv.airtel.visionsample/.activity.MainActivity"
 pname = "tv.airtel.visionsample"
@@ -65,19 +64,19 @@ def getcpucores():
     line_dict_cpu = {}
     try:
         for i in range(1, 5):
-            lo = subprocess.Popen(["adb shell cat sys / devices / system / cpu / cpu" + str(i) +
-                                   " / cpufreq / scaling_cur_freq"],
-                                  stdout=subprocess.PIPE)
-            out = lo.stdout.readlines()
-            line_dict_cpu["CPU" + str(i)] = out
+            lo = os.popen('adb shell cat sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq')
+            out = int(lo.read().strip('\r\n'))
+            if out:
+                line_dict_cpu["CPU" + str(i)] = out
+            else:
+                line_dict_cpu["CPU" + str(i)] = 0
+
     except OSError:
-        return "Unable to fetch CPU core details in Emulator"
+        return "Unable to fetch CPU core details"
 
     if line_dict_cpu:
-        return line_dict_cpu
+        return json.dumps(line_dict_cpu)
     return "App not started.Unable to fetch CPU Core"
 
 
-
 print ("Test Complete")
-
