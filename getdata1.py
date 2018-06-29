@@ -61,15 +61,24 @@ def getcpuinfo(pname):
 
 
 def getcpucores():
+    line_cpu = []
     line_dict_cpu = {}
+
     try:
-        for i in range(1, 5):
-            lo = os.popen('adb shell cat sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq')
-            out = int(lo.read().strip('\r\n'))
-            if out:
-                line_dict_cpu["CPU" + str(i)] = out
-            else:
-                line_dict_cpu["CPU" + str(i)] = 0
+        cpu0 = os.popen('adb shell cat sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq')
+        cpu1 = os.popen('adb shell cat sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq')
+        cpu2 = os.popen('adb shell cat sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq')
+        cpu3 = os.popen('adb shell cat sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq')
+
+        line_cpu.append(int(cpu0.read().strip('\r\n')))
+        line_cpu.append(int(cpu1.read().strip('\r\n')))
+        line_cpu.append(int(cpu2.read().strip('\r\n')))
+        line_cpu.append(int(cpu3.read().strip('\r\n')))
+
+        if line_cpu:
+            line_dict_cpu["CPU"] = line_cpu
+        else:
+            line_dict_cpu["CPU"] = 0
 
     except OSError:
         return "Unable to fetch CPU core details"
