@@ -5,7 +5,7 @@ import org.json.simple.parser.ParseException;
 import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
 
-public class pyhton {
+public class python {
 
 	public static void main(String[] args) throws IOException, ParseException {
 
@@ -27,7 +27,7 @@ public class pyhton {
 		int Total_Heap_Free=(int)jsonObj.get("Total_Heap_Free");
 
 
-System.out.println(Total_Heap_Free +" "+ Total_Heap_Free +" "+Native_Heap_Alloc+" "+Native_Pss+" "+Total_Heap_Alloc+" "+Total_Pss);
+		System.out.println(Total_Heap_Free +" "+ Total_Heap_Free +" "+Native_Heap_Alloc+" "+Native_Pss+" "+Total_Heap_Alloc+" "+Total_Pss);
 
 
 	}
