@@ -1,0 +1,95 @@
+<html xmlns:margin="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Highcharts Tutorial</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+    </script>
+    <script src = "https://code.highcharts.com/highcharts.js"></script>
+    <script src = "https://code.highcharts.com/modules/data.js"></script>
+</head>
+
+<body>
+<div id = "container" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+<script language = "JavaScript">
+         $(document).ready(function() {
+            var data = {
+               table: 'datatable'
+            };
+            var chart = {
+               type: 'column'
+            };
+            var title = {
+               text: 'CPU consumption of Vision Sample App'
+            };
+            var yAxis = {
+               allowDecimals: false,
+               title: {
+                  text: 'Units'
+               }
+            };
+            var tooltip = {
+               formatter: function () {
+                  return '<b>' + this.series.name + '</b><br/>' +
+                     this.point.y + ' ' + this.point.name.toLowerCase();
+               }
+            };
+            var credits = {
+               enabled: false
+            };
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.data = data;
+            json.yAxis = yAxis;
+            json.credits = credits;
+            json.tooltip = tooltip;
+            $('#container').highcharts(json);
+         });
+      </script>
+<style>
+thead {color:green;}
+tbody {color:blue;}
+tfoot {color:red;}
+
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<table id = "datatable" style = "width: 550px; height: 40px; margin: 0 auto">
+    <thead>
+    <tr>
+        <th>Scenario</th>
+        <th>CPU0</th>
+        <th>CPU1</th>
+        <th>CPU2</th>
+        <th>CPU3</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th>login</th>
+        <td>600</td>
+        <td>800</td>
+        <td>1200</td>
+        <td>1000</td>
+    </tr>
+    <tr>
+        <th>logout</th>
+        <td>800</td>
+        <td>1200</td>
+        <td>1100</td>
+        <td>800</td>
+    </tr>
+    <tr>
+        <th>playback</th>
+        <td>800</td>
+        <td>1200</td>
+        <td>1000</td>
+        <td>600</td>
+    </tr>
+
+    </tbody>
+</table>
+</body>
+
+</html>
