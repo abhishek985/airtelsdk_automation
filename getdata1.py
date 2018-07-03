@@ -70,22 +70,24 @@ def getcpucores():
         cpu2 = os.popen('adb shell cat sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq')
         cpu3 = os.popen('adb shell cat sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq')
 
-        line_cpu.append(int(cpu0.read().strip('\r\n')))
-        line_cpu.append(int(cpu1.read().strip('\r\n')))
-        line_cpu.append(int(cpu2.read().strip('\r\n')))
-        line_cpu.append(int(cpu3.read().strip('\r\n')))
+        try:
+            line_cpu.append(int(cpu0.read().strip('\r\n')))
+            line_cpu.append(int(cpu1.read().strip('\r\n')))
+            line_cpu.append(int(cpu2.read().strip('\r\n')))
+            line_cpu.append(int(cpu3.read().strip('\r\n')))
+        except:
+            return "no devices/emulators found"
 
         if line_cpu:
             line_dict_cpu["CPU"] = line_cpu
         else:
             line_dict_cpu["CPU"] = 0
 
-    except OSError:
+    except:
         return "Unable to fetch CPU core details"
 
     if line_dict_cpu:
         return json.dumps(line_dict_cpu)
     return "App not started.Unable to fetch CPU Core"
-
 
 print ("Test Complete")

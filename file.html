@@ -59,7 +59,7 @@ table, th, td {
 <table id = "datatable" style = "width: 550px; height: 40px; margin: 0 auto">
     <thead>
     <tr>
-        <th>Scenario</th>
+         <th>Scenario</th>
         <th>Total Heap Free</th>
         <th>Native Heap Free</th>
         <th>Native Heap Alloc</th>
@@ -71,12 +71,12 @@ table, th, td {
     <tbody>
     <tr>
         <th>login</th>
-        <td>Total_Heap_Free</td>
-        <td>Native_Heap_Free</td>
-        <td>Native_Heap_Alloc</td>
-        <td>Native_Pss</td>
-        <td>Total_Heap_Alloc</td>
-        <td>Total_Pss</td>
+        <td>7540</td>
+        <td>3444</td>
+        <td>19083</td>
+        <td>9179</td>
+        <td>52177</td>
+        <td>64664</td>
         <!--</tr>-->
         <!--<tr>-->
         <!--<th>logout</th>-->
@@ -112,6 +112,7 @@ function drawChart() {
   ['CPU0', 2],
   ['CPU2', 4],
   ['CPU3', 2],
+  ['Sleep', 8]
 ]);
 
   // Optional; add a title and set the width and height of the chart
@@ -146,10 +147,6 @@ table, th, td {
     <tbody>
     <tr>
         <th>login</th>
-        <td>CPU_0</td>
-        <td>CPU_1</td>
-        <td>CPU_2</td>
-        <td>CPU_3</td>
     </tr>
     <!--<tr>-->
     <!--<th>logout</th>-->
